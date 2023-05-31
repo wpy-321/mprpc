@@ -2,7 +2,7 @@
 #include <string>
 #include "user.pb.h"
 #include "MprpcApplication.h"
-#include "RpcProvider.h"
+#include "MprpcProvider.h"
 using namespace std;
 using namespace fixbug;
 
@@ -32,7 +32,7 @@ public:
         bool myresult = Login(name,pwd);
          // 把响应写入框架中  包括错误码、错误消息、返回值
         ResultCode* rc =  response->mutable_result();
-        rc->set_errcode(1);
+        rc->set_errcode(0);
         rc->set_errmsg("error!");
         response->set_success(myresult);
         // 执行回调操作，就是告诉框架执行响应对象数据的序列化和网络发送（都是由框架来完成的）
@@ -46,7 +46,7 @@ int main(int argc,char** argv)
     MprpcApplication::Init(argc,argv);
 
     // provider是一个rpc网络服务对象。把UserService对象发布到rpc节点上,负责序列化和反序列化以及网络的收发
-    RpcProvider provider;
+    MprpcProvider provider;
     provider.NotifyService(new UserService);
 
     // 启动一个rpc服务发布节点   Run以后，进程进入阻塞状态，等待远程的rpc调用请求

@@ -1,5 +1,7 @@
 #pragma once
 #include "MprpcConfig.h"
+#include "MprpcChannel.h"
+#include "MprpcController.h"
 
 class MprpcApplication
 {

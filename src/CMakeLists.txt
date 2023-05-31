@@ -2,12 +2,14 @@
 #aux_source_directory(. SRC_LIST)
 set(SRC_LIST
 MprpcApplication.cpp
-RpcProvider.cpp  
+MprpcProvider.cpp
 MprpcConfig.cpp  
 MprpcChannel.cpp
+MprpcController.cpp
+zookeeperutil.cpp
 rpcheader.pb.cc
 )
 # 根据SRC_LIST中的源文件编译生成动态库mprpc
 add_library(mprpc ${SRC_LIST})
 
-target_link_libraries(mprpc muduo_net muduo_base pthread)
+target_link_libraries(mprpc muduo_net muduo_base pthread zookeeper_mt)
